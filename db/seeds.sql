@@ -1,41 +1,26 @@
 
 
-DROP DATABASE IF EXISTS employee_tracker_db;
-CREATE DATABASE employee_tracker_db;
-USE employee_tracker_db;
+USE employees_db;
 
-
-CREATE TABLE games(
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    game_name VARCHAR(256) NOT NULL,
-    downloads INTEGER NOT NULL
-);
-
-INSERT INTO games (game_name, downloads)
+-- need to seed departments table
+INSERT INTO department (name)
 VALUES
-    ('roblox', 455),
-    ('battlerite', 63),
-    ('minecraft', 674678);
+("Sales"),
+("Cleaning"),
+("Marketing");
 
-
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(256) NOT NULL,
-    pass VARCHAR(256) NOT NULL,
-    favorite_game_id INTEGER NOT NULL,
-    CONSTRAINT favorite_game_id FOREIGN KEY (id) REFERENCES games(id)
-);
-
-INSERT INTO users (name, pass, favorite_game_id)
+-- need to seed roles table
+INSERT INTO role (title, salary, department_id)
 VALUES
-    ('william', '123', 1),
-    ('jake', '321', 3),
-    ('martin', 'ssd34', 3);
+("Receptionist", 40000, 1),
+("Manager", 60000, 2),
+("Intern", 12000, 3);
 
-
-SELECT users.*, games.game_name, games.downloads AS hits 
-FROM users
-INNER JOIN games ON users.favorite_game_id = games.id;
+-- need to seed employees table
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("John", "Swinda", 1, null),
+("William", "Clarke", 2, 1),
+("Chris", "Baker", 3, 1);
 
     
 
