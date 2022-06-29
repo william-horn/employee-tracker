@@ -1,9 +1,10 @@
 
-const inquirer = require('inquirer');
+require('console.table');
+const { prompt } = require('inquirer');
 const dbRender = require('./lib/db-render');
 
 const getOptionsInfo = () => {
-    return inquirer.prompt({
+    return prompt({
         type: 'list',
         name: 'option',
         message: 'What would you like to do?',
@@ -22,19 +23,19 @@ const getOptionsInfo = () => {
             },
             {
                 name: "Add a Department",
-                value: "addDepartment",
+                value: "addDepartmentOption",
             },
             {
                 name: "Add a Role",
-                value: "addRole",
+                value: "addRoleOption",
             },
             {
                 name: "Add an Employee",
-                value: "addEmployee",
+                value: "addEmployeeOption",
             },
             {
                 name: "Update an Employee Role",
-                value: "updateEmployeeRole",
+                value: "updateEmployeeRoleOption",
             },
             {
                 name: "Quit",
@@ -47,7 +48,7 @@ const getOptionsInfo = () => {
 const init = async () => {
 
     while (true) {
-        const option = (await getOptionsInfo()).option;
+        const { option } = (await getOptionsInfo());
 
         if (option === 'quit') {
             console.log('Goodbye!');
